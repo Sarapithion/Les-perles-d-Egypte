@@ -24,11 +24,11 @@ class ArticleType extends AbstractType
             ->add('Validation')
             ->add('utilisateur', EntityType::class, [
                 'class' => Utilisateur::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('Categorie', EntityType::class, [
                 'class' => Categorie::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
         ;
     }
