@@ -13,6 +13,8 @@ align-items: center;
    height: 52px; */
    padding: 8px;
    text-align: center;
+   /* margin-top: 20px; */
+   margin-left:20px;
 }
 
 .fondBouton{
@@ -32,6 +34,7 @@ align-items: center;
     height: 159px;
     margin: auto;
     margin-bottom: 6%;
+    
 }
 
 .categorieArticles img {
@@ -57,7 +60,7 @@ align-items: center;
    flex-direction: column;
    width: 100%;
 }
-.actus {
+/* .actus {
     margin: 20px;
     background-color: #fff;
     border: 1px solid #000;
@@ -69,7 +72,7 @@ align-items: center;
     line-height: 1, 8px;
     border-radius: 9px;
     padding: 20px;
-}
+} */
 
 .titreArticle{
     font-size: 18px;
@@ -81,10 +84,12 @@ align-items: center;
 }
 
 .button-group {
-    margin-top: 10px;
+    margin-left: 50px;
+   
 }
-
-.bouton {
-    margin-right: 10px;
+.contenaireCard{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-around;
+    margin-bottom: 60px;
 }
-

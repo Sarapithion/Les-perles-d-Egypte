@@ -6,64 +6,120 @@
 
     {% include('includes/header.html.twig') %}
 
-<div class= "articles">
-    <h1 >Articles</h1>
+<div class="articles">
+    <h1>Articles</h1>
+</div>
+
+<div class="categories-container">
+    <div class="categorieArticles">
+        <img src="images/iconePyramides.png" alt="Pyramides avec soleil">
+        <button>Actualités</button>
     </div>
-    <div class="categories-container">
-        <div class="categorieArticles">
-                <img src="images/iconePyramides.png" alt="Pyramides avec soleil">
-                <button>Actualités</button>
-        </div>
-    
-        <div class="categorieArticles">
-                <img src="images/iconePharaon.png" alt="Icône d'un pharaon">
-                <button>Personnages</button>
+    <div class="contenaireCard">
+       
+        {% set hasArticles = false %}
 
-        </div>
-
-        <div class="categorieArticles">
-                <img src="images/iconeFemme.png" alt="Icône d'une femme égyptienne">
-                <button>Vie quotidienne</button>
-
-        </div>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Date</th>
-                <th>Resume</th>
-                <th>Contenu</th>
-                <th>Validation</th>
-                <th>actions</th>
-            </tr>
-            
-            
-        </thead>
-        <tbody>
-        
         {% for article in articles %}
-    <div class="actus">
-        <div class="actualité1 "> 
-            <p class="titreArticle">{{ article.Titre }}</p>
-            <p class="date">{{ article.Date ? article.Date|date('Y-m-d H:i:s') : '' }}</p> 
-            <p class="event-resume">{{ article.Resume }}</p>
-            <p class="event-contenu">{{ article.Contenu }}</p>
-            <p class="event-validation">{{ article.Validation ? 'Yes' : 'No' }}</p>
-            <div class="button-group">
-                <a class="bouton fondBouton" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
-                <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
-            </div>
-        </div>
-    </div>
-{% else %}
-    <div class="actus">
-        <p>Pas d'article</p>
-    </div>
-{% endfor %}
-        </tbody>
-    </table>
+            {% if article.categorie.nom == 'Actualités' %}
+                {% set hasArticles = true %}
+                <div class="actualité1 p img"> 
+                    <p class="titreArticle">{{ article.Titre }}</p>
+                    <p class="date">{{ article.Date ? article.Date|date('Y-m-d H:i:s') : '' }}</p> 
+                    <p class="event-resume">{{ article.Resume }}</p>
+                    <p class="event-contenu">{{ article.Contenu }}</p>
+                    <p class="event-validation">{{ article.Validation ? 'Yes' : 'No' }}</p>
+                    <p class="categorie">Catégorie : {{ article.categorie.nom }}</p> 
+                    <div class="button-group">
+                        <a class="bouton fondBouton" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
+                        <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+                        <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
 
-    <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel <br> article</a>
+        {% if not hasArticles %}
+            <div class="actus">
+                <p>Pas d'article</p>
+            </div>
+            <div class="button-group">
+                <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="categorieArticles">
+        <img src="images/iconePharaon.png" alt="Icône d'un pharaon">
+        <button>Personnages</button>
+    </div>
+    <div class="contenaireCard">
+       
+        {% set hasArticles = false %}
+
+        {% for article in articles %}
+            {% if article.categorie.nom == 'Personnages' %}
+                {% set hasArticles = true %}
+                <div class="actualité1 p img"> 
+                    <p class="titreArticle">{{ article.Titre }}</p>
+                    <p class="date">{{ article.Date ? article.Date|date('Y-m-d H:i:s') : '' }}</p> 
+                    <p class="event-resume">{{ article.Resume }}</p>
+                    <p class="event-contenu">{{ article.Contenu }}</p>
+                    <p class="categorie">Catégorie : {{ article.categorie.nom }}</p> 
+                    <div class="button-group">
+                        <a class="bouton fondBouton" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
+                        <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+                        <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% if not hasArticles %}
+            <div class="actus">
+                <p>Pas d'article</p>
+            </div>
+            <div class="button-group">
+                <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="categorieArticles">
+        <img src="images/iconeFemme.png" alt="Icône d'une femme égyptienne">
+        <button>Vie quotidienne</button>
+    </div>
+    <div class="contenaireCard">
+       
+        {% set hasArticles = false %}
+
+        {% for article in articles %}
+            {% if article.categorie.nom == 'Vie quotidienne' %}
+                {% set hasArticles = true %}
+                <div class="actualité1 p img"> 
+                    <p class="titreArticle">{{ article.Titre }}</p>
+                    <p class="date">{{ article.Date ? article.Date|date('Y-m-d H:i:s') : '' }}</p> 
+                    <p class="event-resume">{{ article.Resume }}</p>
+                    <p class="event-contenu">{{ article.Contenu }}</p>
+                    <p class="event-validation">{{ article.Validation ? 'Oui' : 'Non' }}</p>
+                    <p class="categorie">Catégorie : {{ article.categorie.nom }}</p> 
+                    <div class="button-group">
+                        <a class="bouton fondBouton" href="{{ path('app_article_show', {'id': article.id}) }}">Voir</a>
+                        <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+                        <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        {% if not hasArticles %}
+            <div class="actus">
+                <p>Pas d'article</p>
+            </div>
+            <div class="button-group">
+                <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
 {% endblock %}
