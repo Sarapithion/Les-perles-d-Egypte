@@ -18,8 +18,8 @@ class UtilisateurType extends AbstractType
             ->add('Nom')
             ->add('Prenom')
             ->add('Email')
-            ->add('Motdepasse',PasswordType::class)
-            ->add('Role')
+            ->add('Motdepasse',PasswordType::class, ["label" =>"Mot de passe"])
+            // ->add('Role')
             // ->add('Evenement', EntityType::class, [
                 // 'class' => Evenement::class,
                 // 'choice_label' => 'id',

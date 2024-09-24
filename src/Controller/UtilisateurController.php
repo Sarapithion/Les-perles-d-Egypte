@@ -32,10 +32,11 @@ final class UtilisateurController extends AbstractController{
             $password=$form->get("Motdepasse")->getData();
             $hashpassword = password_hash($password, PASSWORD_DEFAULT);
             $utilisateur->setMotdepasse($hashpassword);
+            $utilisateur->setRole("Utilisateur");
             $entityManager->persist($utilisateur);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);//Quand l'utilisateur est enregistré, il est redirigé sur la page d'accueil//
         }
 
         return $this->render('utilisateur/new.html.twig', [
