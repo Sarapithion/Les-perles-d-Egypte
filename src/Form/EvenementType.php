@@ -20,16 +20,6 @@ class EvenementType extends AbstractType
             ])
             ->add('Resume')
             ->add('Contenu')
-            ->add('Validation')
-            ->add('utilisateurs', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
-            ->add('utilisateurOrganisation', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'id',
-            ])
         ;
     }
 

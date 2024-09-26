@@ -123,7 +123,7 @@ class Evenement
     {
         if (!$this->utilisateurs->contains($utilisateur)) {
             $this->utilisateurs->add($utilisateur);
-            $utilisateur->addEvNement($this);
+            $utilisateur->addEvenement($this);
         }
 
         return $this;
@@ -132,7 +132,7 @@ class Evenement
     public function removeUtilisateur(Utilisateur $utilisateur): static
     {
         if ($this->utilisateurs->removeElement($utilisateur)) {
-            $utilisateur->removeEvNement($this);
+            $utilisateur->removeEvenement($this);
         }
 
         return $this;

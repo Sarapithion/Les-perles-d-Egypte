@@ -6,6 +6,7 @@ use App\Entity\Evenement;
 use App\Entity\Utilisateur;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,8 +18,12 @@ class UtilisateurType extends AbstractType
         $builder
             ->add('Nom')
             ->add('Prenom')
-            ->add('Email')
-            ->add('Motdepasse',PasswordType::class, ["label" =>"Mot de passe"])
+            ->add('Email', EmailType::class)
+            ->add('Password',PasswordType::class, ["label" =>"Mot de passe"])
+            ->add('Password2', PasswordType::class,["label" =>"Confirmer votre mot de passe",
+            'mapped' => false
+        ]);
+
             // ->add('Role')
             // ->add('Evenement', EntityType::class, [
                 // 'class' => Evenement::class,

@@ -6,30 +6,39 @@ use App\Repository\UtilisateurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $nom = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $Nom = null;
+    private ?string $prenom = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $Prenom = null;
+    #[ORM\Column(length: 180)]
+    private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Email = null;
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $roles = [];
 
-    #[ORM\Column(length: 255)]
-    private ?string $Motdepasse = null;
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $Role = null;
 
     /**
      * @var Collection<int, Evenement>
@@ -63,78 +72,104 @@ class Utilisateur
         $this->Article = new ArrayCollection();
     }
 
-
-    public function getid(): ?int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setid(int $id): static
+    public function getEmail(): ?string
     {
-        $this->id = $id;
+        return $this->email;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getNom(): ?string
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->Nom;
+        return (string) $this->email;
     }
 
-    public function setNom(string $Nom): static
+    /**
+     * @see UserInterface
+     * @return list<string>
+     */
+    public function getRoles(): array
     {
-        $this->Nom = $Nom;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
 
         return $this;
     }
 
     public function getPrenom(): ?string
     {
-        return $this->Prenom;
+        return $this->prenom;
     }
 
-    public function setPrenom(string $Prenom): static
+    public function setPrenom(string $prenom): static
     {
-        $this->Prenom = $Prenom;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
-        return $this->Email;
-    }
-
-    public function setEmail(string $Email): static
-    {
-        $this->Email = $Email;
-
-        return $this;
-    }
-
-    public function getMotdepasse(): ?string
-    {
-        return $this->Motdepasse;
-    }
-
-    public function setMotdepasse(string $Motdepasse): static
-    {
-        $this->Motdepasse = $Motdepasse;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->Role;
-    }
-
-    public function setRole(string $Role): static
-    {
-        $this->Role = $Role;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Evenement>
@@ -144,18 +179,18 @@ class Utilisateur
         return $this->Evenement;
     }
 
-    public function addEvNement(Evenement $evNement): static
+    public function addEvenement(Evenement $Evenement): static
     {
-        if (!$this->Evenement->contains($evNement)) {
-            $this->Evenement->add($evNement);
+        if (!$this->Evenement->contains($Evenement)) {
+            $this->Evenement->add($Evenement);
         }
 
         return $this;
     }
 
-    public function removeEvNement(Evenement $evNement): static
+    public function removeEvenement(Evenement $Evenement): static
     {
-        $this->Evenement->removeElement($evNement);
+        $this->Evenement->removeElement($Evenement);
 
         return $this;
     }

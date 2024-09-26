@@ -3,8 +3,6 @@
 {% block title %}Evenement index{% endblock %}
 
 {% block body %}
-    
-        {% include('includes/header.html.twig') %}
 
     <h1>Evènements</h1>
 
@@ -30,8 +28,8 @@
                 <td>{{ evenement.Contenu }}</td>
                 <td>{{ evenement.Validation ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">voir</a>
-                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">modifier</a>
+                    <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">Voir</a>
+                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -42,5 +40,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_evenement_new') }}">Create new</a>
+    <a href="{{ path('app_evenement_new') }}">Créer un nouvel évènement</a>
 {% endblock %}
