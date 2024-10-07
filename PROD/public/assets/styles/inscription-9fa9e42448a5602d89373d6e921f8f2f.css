@@ -1,0 +1,13 @@
+.inscription{
+   padding:30px;
+   width:fit-content;
+   margin:auto;
+}
+.titreInscription{
+    padding:30px;
+}
+
+.inscription input{
+    margin-bottom: 20px;
+}
+
