@@ -21,11 +21,7 @@ class ArticleType extends AbstractType
             ])
             ->add('Resume')
             ->add('Contenu')
-            ->add('Validation')
-            ->add('utilisateur', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'nom',
-            ])
+
             ->add('Categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'nom',

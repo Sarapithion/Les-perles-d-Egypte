@@ -1,15 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Evenement index{% endblock %}
+{% block title %}Evènements{% endblock %}
 
 {% block body %}
 
     <h1>Evènements</h1>
 
+{% if app.user %}
+    <p> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</p>
+
+    {% else %}
+        <p>Bienvenue, visiteur!</p>
+    {% endif %}
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                {# <th>Id</th> #}
                 <th>Titre</th>
                 <th>Date</th>
                 <th>Resume</th>
@@ -26,10 +32,12 @@
                 <td>{{ evenement.Date ? evenement.Date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ evenement.Resume }}</td>
                 <td>{{ evenement.Contenu }}</td>
-                <td>{{ evenement.Validation ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">Voir</a>
-                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
+                     <a href="{{ path('app_evenement_valid_event', {'id': evenement.id}) }}" onclick="event.preventDefault(); document.getElementById('validate-event-{{ evenement.id }}').submit();">Valider</a>
+            <form id="validate-event-{{ evenement.id }}" action="{{ path('app_evenement_valid_event', {'id': evenement.id}) }}" method="POST" style="display: none;">
+                <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ evenement.id) }}">
+            </form>
+            <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}

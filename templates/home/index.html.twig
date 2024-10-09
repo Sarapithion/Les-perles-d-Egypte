@@ -6,7 +6,12 @@
         <div class="imageAccueil">
 
         {% include('includes/header.html.twig') %}
+        {% if app.user %}
+    <p> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</p>
 
+    {% else %}
+        <p>Bienvenue, visiteur!</p>
+    {% endif %}
         
         </div>
 {% endblock %}
@@ -53,18 +58,20 @@
 </div>
 <div class="categories-container">
         <div class="categorie1">
-                <img src="images/iconePyramides.png" alt="Pyramides avec soleil">
+                <img src="{{ asset('images/iconePyramides.png') }}" alt="Pyramides avec soleil">
+
                 <button>Actualités</button>
         </div>
     
         <div class="categorie2">
-                <img src="images/iconePharaon.png" alt="Icône d'un pharaon">
+                <img src="{{ asset('images/iconePharaon.png') }}" alt="Icône d'un pharaon">
+
                 <button>Personnages</button>
 
         </div>
 
         <div class="categorie3">
-                <img src="images/iconeFemme.png" alt="Icône d'une femme égyptienne">
+                <img src="{{ asset('images/iconeFemme.png') }}" alt="Icône d'une femme égyptienne">
                 <button>Vie quotidienne</button>
 
         </div>
