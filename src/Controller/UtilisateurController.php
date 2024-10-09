@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/utilisateur')]
-final class UtilisateurController extends AbstractController{
+final class UtilisateurController extends AbstractController
+{
     #[Route(name: 'app_utilisateur_index', methods: ['GET'])]
     public function index(UtilisateurRepository $utilisateurRepository): Response
     {
@@ -29,18 +30,26 @@ final class UtilisateurController extends AbstractController{
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password=$form->get("Motdepasse")->getData();
-            $hashpassword = password_hash($password, PASSWORD_DEFAULT);
-            $utilisateur->setMotdepasse($hashpassword);
-            $entityManager->persist($utilisateur);
-            $entityManager->flush();
+            $password = $form->get("Password")->getData();
+            $password2 = $form->get('Password2')->getData();
 
-            return $this->redirectToRoute('app_utilisateur_index', [], Response::HTTP_SEE_OTHER);
+            if ($password !== $password2) {
+                // Ajouter l'erreur au formulaire si les mots de passe ne correspondent pas
+                $form->addError(new \Symfony\Component\Form\FormError('Les mots de passe ne correspondent pas.'));
+            } else {
+                // Hachage du mot de passe
+                $hashpassword = password_hash($password, PASSWORD_DEFAULT);
+                $utilisateur->setPassword($hashpassword);
+                $entityManager->persist($utilisateur);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Votre inscription est validée');
+                return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->render('utilisateur/new.html.twig', [
-            'utilisateur' => $utilisateur,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -66,14 +75,14 @@ final class UtilisateurController extends AbstractController{
 
         return $this->render('utilisateur/edit.html.twig', [
             'utilisateur' => $utilisateur,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_utilisateur_delete', methods: ['POST'])]
     public function delete(Request $request, Utilisateur $utilisateur, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$utilisateur->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $utilisateur->getId(), $request->request->get('_token'))) {
             $entityManager->remove($utilisateur);
             $entityManager->flush();
         }

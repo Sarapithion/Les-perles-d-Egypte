@@ -3,7 +3,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: 130vh;
-    width: 100vw;
+    width: 99vw;
     margin-bottom: 50px;
 }
 
@@ -125,15 +125,15 @@
 .actualité1 {
     background-color: #fff;
     border: 1px solid #000;
-    width: 30%;
+    width: fit-content;
     height: fit-content;
-    height: 150px;
-
     font-weight: bold;
     font-size: 18px;
     line-height: 1, 8px;
     border-radius: 9px;
     padding: 20px;
+    position:relative;
+    margin:5px 20px;
 }
 
 .actualité1 p {
@@ -189,3 +189,5 @@
     align-items: center;
     flex-wrap: wrap;
 }
+
+

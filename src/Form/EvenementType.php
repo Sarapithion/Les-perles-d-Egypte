@@ -8,6 +8,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 
 class EvenementType extends AbstractType
 {
@@ -15,21 +17,11 @@ class EvenementType extends AbstractType
     {
         $builder
             ->add('Titre')
-            ->add('Date', null, [
+            ->add('Date',DateType::class, [
                 'widget' => 'single_text'
             ])
             ->add('Resume')
             ->add('Contenu')
-            ->add('Validation')
-            ->add('utilisateurs', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
-            ->add('utilisateurOrganisation', EntityType::class, [
-                'class' => Utilisateur::class,
-                'choice_label' => 'id',
-            ])
         ;
     }
 

@@ -3,9 +3,26 @@
 {% block title %}New Utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Create new Utilisateur</h1>
+ {% if app.user %}
+    <p> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</p>
 
-    {{ include('utilisateur/_form.html.twig') }}
+    {% else %}
+        <p>Bienvenue, visiteur!</p>
+    {% endif %}
+       
+    <div class="inscription">
+        <h1 class="titreInscription">Inscrivez-vous!</h1>
 
-    <a href="{{ path('app_utilisateur_index') }}">back to list</a>
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+
+        {# Inclure le formulaire en passant l'objet form #}
+        {{ include('utilisateur/_form.html.twig', { 'form': form }) }}
+    </div>
 {% endblock %}

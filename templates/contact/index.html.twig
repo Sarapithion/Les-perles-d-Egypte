@@ -3,7 +3,15 @@
 {% block title %}Contact index{% endblock %}
 
 {% block body %}
-    <h1>Contact index</h1>
+    
+
+    <h1>Page de contact</h1>
+{% if app.user %}
+    <p> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</p>
+
+    {% else %}
+        <p>Bienvenue, visiteur!</p>
+    {% endif %}
 
     <table class="table">
         <thead>
