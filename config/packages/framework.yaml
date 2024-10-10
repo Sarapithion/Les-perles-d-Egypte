@@ -8,8 +8,8 @@ framework:
 
     #esi: true
     #fragments: true
-    # assets:
-    #     base_url: '%env(HOME_URL)%'
+    assets:
+        base_url: '%env(HOME_URL)%'
 
 when@test:
     framework:

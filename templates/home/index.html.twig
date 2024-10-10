@@ -3,6 +3,11 @@
 {% block title %}Les perles d'Egypte{% endblock %}
 
 {% block header %}
+    <style>
+		.imageAccueil {
+			background-image: url('{{ asset('/images/PhotoStatues.jpg') }}') !important;
+		}
+	</style>
         <div class="imageAccueil">
 
         {% include('includes/header.html.twig') %}
