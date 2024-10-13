@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles à valider{% endblock %}
+
+{% block body %}
+    <h1>Articles à valider</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% if articles is empty %}
+        <p>Aucun article à valider pour le moment.</p>
+    {% else %}
+        {% for article in articles %}
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Auteur</th>
+    <td>
+        {% if article.utilisateur %}
+            {{ article.utilisateur.prenom }} {{ article.utilisateur.nom }}
+        {% else %}
+            Auteur inconnu
+        {% endif %}
+    </td>
+</tr>
+                    <tr>
+                        <th>Titre</th>
+                        <td>{{ article.Titre }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>{{ article.Date ? article.Date|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Résumé</th>
+                        <td>{{ article.Resume }}</td>
+                    </tr>
+                    <tr>
+                        <th>Contenu</th>
+                        <td>{{ article.Contenu|raw }}</td>
+                    </tr>
+                    <tr>
+                        <th>Validation</th>
+                        <td>{{ article.Validation ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="mb-4">
+                <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-info">Voir en détail</a>
+                {% if not article.Validation %}
+                    <a href="{{ path('app_article_valid_event', {'id': article.id}) }}" class="btn btn-success">Valider</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <a href="{{ path('app_article_index') }}" class="btn btn-primary">Retour à la liste des articles</a>
+{% endblock %}

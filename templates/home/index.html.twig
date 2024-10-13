@@ -3,6 +3,7 @@
 {% block title %}Les perles d'Egypte{% endblock %}
 
 {% block header %}
+    
     <style>
 		.imageAccueil {
 			background-image: url('{{ asset('/images/PhotoStatues.jpg') }}') !important;
@@ -18,8 +19,16 @@
         <p>Bienvenue, visiteur!</p>
     {% endif %}
         
+        {% for message in app.flashes('denied access validate') %}
+			<div class="bg-success">
+				{{ message | join('<br>') }}
+			</div>
+		{% endfor %}
         </div>
 {% endblock %}
+
+
+                
 
 {% block body %}
 

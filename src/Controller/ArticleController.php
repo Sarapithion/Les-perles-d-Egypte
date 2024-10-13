@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/article')]
 final class ArticleController extends AbstractController
@@ -17,16 +18,22 @@ final class ArticleController extends AbstractController
     #[Route(name: 'app_article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
+        $isAdmin = $this->isGranted('ROLE_ADMIN');
         return $this->render('article/index.html.twig', [
             'articles' => $articleRepository->findBy(['Validation' => true]),
+            'isAdmin' => $isAdmin,
         ]);
     }
 
     #[Route('/to-validate', name: 'app_article_to_validate', methods: ['GET'])]
+    #[IsGranted("ROLE_ADMIN", message: "Vous n'avez pas le droit d'accéder à cette page")]
     public function toValidate(ArticleRepository $articleRepository): Response
     {
-        return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findBy(['Validation' => false]),
+        $articlesToValidate = $articleRepository->findBy(['Validation' => false]);
+
+        return $this->render('article/to_validate.html.twig', [
+            'articles' => $articlesToValidate,
+            'isValidationPage' => true,
         ]);
     }
     #[Route('/validate-article/{id}', name: 'app_article_valid_event', methods: ['POST', 'GET'])]
@@ -44,7 +51,10 @@ final class ArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_article_index');
+        // Ajoute un message flash pour informer l'utilisateur
+        $this->addFlash('success', 'L\'article a été validé avec succès.');
+
+        return $this->redirectToRoute('app_article_to_validate');
     }
 
 
@@ -68,9 +78,12 @@ final class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setValidation(false);
             $entityManager->persist($article);
             $entityManager->flush();
 
+            // Message flash
+            
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
         }
 

@@ -3,14 +3,16 @@ form {
     flex-direction: column; 
     justify-content: center; 
     align-items: center; 
-    padding: 20px; 
+    padding: 30px; 
     border: 1px solid #ced4da; 
     border-radius: 5px; 
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-}
+    width:fit-content;
+    margin: 100px auto}
 
 h1 {
+    padding:30px;
     margin-bottom: 20px; 
     text-align: center; 
 }
@@ -21,7 +23,7 @@ label {
 
 input[type='email'],
 input[type='password'] {
-    margin-bottom: 15px; 
+margin-bottom: 20px; 
 }
 
 .checkbox {

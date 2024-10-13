@@ -10,143 +10,79 @@
 
 {% if app.user %}
     <p> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</p>
+{% else %}
+    <p>Bienvenue, visiteur!</p>
+{% endif %}
+<br>
+{% if isAdmin %}
+    <a href="{{ path('app_article_to_validate') }}" class="btn btn-primary">
+        Articles à valider
+    </a>
+{% endif %}
 
-    {% else %}
-        <p>Bienvenue, visiteur!</p>
-    {% endif %}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
+
+{% for message in app.flashes('info') %}
+    <div class="alert alert-info">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <div class="categories-container">
-    <div class="categorieArticles">
-        <img src="{{ asset('images/iconePyramides.png') }}" alt="Pyramides avec soleil">
-        <button>Actualités</button>
-    </div>
-    <div class="contenaireCard">
-       
-        {% set hasArticles = false %}
+    {% for categorie in ['Actualités', 'Personnages', 'Vie quotidienne'] %}
+        <div class="categorieArticles">
+            <img src="{{ asset('images/icone' ~ (categorie == 'Actualités' ? 'Pyramides' : (categorie == 'Personnages' ? 'Pharaon' : 'Femme')) ~ '.png') }}" alt="Icône {{ categorie }}">
+            <button>{{ categorie }}</button>
+        </div>
+        <div class="contenaireCard">
+            {% set hasArticles = false %}
 
-        {% for article in articles %}
-            {% if article.categorie.nom == 'Actualités' %}
-                {% set hasArticles = true %}
-                <div class="actualité1 p img"> 
-                    <p class="titreArticle">{{ article.Titre }}</p>
-                    <p class="date">{{ article.Date ? article.Date|date('Y-m-d H:i:s') : '' }}</p> 
-                    <p class="event-resume">{{ article.Resume }}</p>
-                    <p class="event-contenu">{{ article.Contenu }}</p>
-                    <p class="categorie">Catégorie : {{ article.categorie.nom }}</p> 
-                    <div class="button-group">
-                        <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
-                        <a  class="bouton fondBouton" href="{{ path('app_article_valid_event', {'id': article.id}) }}" 
-                        onclick="event.preventDefault(); document.getElementById('validate-article-{{ article.id }}').submit();">Valider</a>
-                        <form id="validate-article-{{ article.id }}" action="{{ path('app_article_valid_event', {'id': article.id}) }}" method="POST" style="display: none;">
-                            <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ article.id) }}">
-                        </form>
+            {% for article in articles %}
+                {% if article.categorie.nom == categorie %}
+                    {% set hasArticles = true %}
+                    <div class="actualité1 p img"> 
+                        <p class="titreArticle">{{ article.Titre }}</p>
+                        <p class="date">{{ article.Date ? article.Date|date('Y-m-d H:i:s') : '' }}</p> 
+                        <p class="event-resume">{{ article.Resume }}</p>
+                        <p class="event-contenu">{{ article.Contenu }}</p>
+                        <p class="categorie">Catégorie : {{ article.categorie.nom }}</p> 
+                        <div class="button-group">
+    {# Condition si l'utilisateur a un rôle admin et que l'article n'a pas été encore validé, on laisse le bouton modifier. Sinon il n'apparait plus #}
+    {% if app.user %}  
+        {% if is_granted('ROLE_ADMIN') or not article.Validation %}
+            <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+        {% endif %}
+    {% endif %}
+    {# Consition si l'utilisateur a un role admin et que les articles n'ont pas encore été validés, le bouton reste présent. Sinon il disparait #}
+    {% if is_granted('ROLE_ADMIN') and not article.Validation %}
+        <a class="bouton fondBouton" href="{{ path('app_article_valid_event', {'id': article.id}) }}" 
+           onclick="event.preventDefault(); document.getElementById('validate-article-{{ article.id }}').submit();">Valider</a>
+        <form id="validate-article-{{ article.id }}" action="{{ path('app_article_valid_event', {'id': article.id}) }}" method="POST" style="display: none;">
+            <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ article.id) }}">
+        </form>
+    {% endif %}
+</div>
                     </div>
+                {% endif %}
+            {% endfor %}
+
+            {% if not hasArticles %}
+                <div class="actus">
+                    <p>Pas d'article</p>
                 </div>
             {% endif %}
-        {% endfor %}
 
-        {% if not hasArticles %}
-            <div class="actus">
-                <p>Pas d'article</p>
-            </div>
-        {% endif %}
-
-        {# Condition pour que seul l'utilisateur connecté qui a un rôle admin ou user puisse ajouter un article
-        S'il n'est pas connecté, il ne pourra que lire les articles #}
-        {% if app.user and (is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')) %}
-            <div class="button-group">
-                <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
-            </div>
-        {% endif %}
-    </div>
-
-    <div class="categorieArticles">
-        <img src="{{ asset('images/iconePharaon.png') }}" alt="Icône d'un pharaon">
-        <button>Personnages</button>
-    </div>
-    <div class="contenaireCard">
-       
-        {% set hasArticles = false %}
-
-        {% for article in articles %}
-            {% if article.categorie.nom == 'Personnages' %}
-                {% set hasArticles = true %}
-                <div class="actualité1 p img"> 
-                    <p class="titreArticle">{{ article.Titre }}</p>
-                    <p class="date">{{ article.Date ? article.Date|date('Y-m-d H:i:s') : '' }}</p> 
-                    <p class="event-resume">{{ article.Resume }}</p>
-                    <p class="event-contenu">{{ article.Contenu }}</p>
-                    <p class="categorie">Catégorie : {{ article.categorie.nom }}</p> 
-                    <div class="button-group">
-                        <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
-                        <a  class="bouton fondBouton"  href="{{ path('app_article_valid_event', {'id': article.id}) }}" 
-                        onclick="event.preventDefault(); document.getElementById('validate-article-{{ article.id }}').submit();">Valider</a>
-                        <form id="validate-article-{{ article.id }}" action="{{ path('app_article_valid_event', {'id': article.id}) }}" method="POST" style="display: none;">
-                            <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ article.id) }}">
-                        </form>                        
-                    </div>
-                </div>
-            {% endif %}
-        {% endfor %}
-
-        {% if not hasArticles %}
-            <div class="actus">
-                <p>Pas d'article</p>
-            </div>
-        {% endif %}
-
-{# Condition pour que seul l'utilisateur connecté qui a un rôle admin ou user puisse ajouter un article
-S'il n'est pas connecté, il ne pourra que lire les articles #}
             {% if app.user and (is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')) %}
-            <div class="button-group">
-                <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
-            </div>
-        {% endif %}
-    </div>
-
-    <div class="categorieArticles">
-        <img src="{{ asset('images/iconeFemme.png') }}" alt="Icône d'une femme égyptienne">
-        <button>Vie quotidienne</button>
-    </div>
-    <div class="contenaireCard">
-       
-        {% set hasArticles = false %}
-
-        {% for article in articles %}
-            {% if article.categorie.nom == 'Vie quotidienne' %}
-                {% set hasArticles = true %}
-                <div class="actualité1 p img"> 
-                    <p class="titreArticle">{{ article.Titre }}</p>
-                    <p class="date">{{ article.Date ? article.Date|date('Y-m-d H:i:s') : '' }}</p> 
-                    <p class="event-resume">{{ article.Resume }}</p>
-                    <p class="event-contenu">{{ article.Contenu }}</p>
-                    <p class="categorie">Catégorie : {{ article.categorie.nom }}</p> 
-                    <div class="button-group">
-                        <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
-                        <a  class="bouton fondBouton" href="{{ path('app_article_valid_event', {'id': article.id}) }}" 
-                        onclick="event.preventDefault(); document.getElementById('validate-article-{{ article.id }}').submit();">Valider</a>
-                        <form id="validate-article-{{ article.id }}" action="{{ path('app_article_valid_event', {'id': article.id}) }}" method="POST" style="display: none;">
-                            <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ article.id) }}">
-                        </form>
-                    </div>
+                <div class="button-group">
+                    <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
                 </div>
             {% endif %}
-        {% endfor %}
-
-        {% if not hasArticles %}
-            <div class="actus">
-                <p>Pas d'article</p>
-            </div>
-        {% endif %}
-
-{# Condition pour que seul l'utilisateur connecté qui a un rôle admin ou user puisse ajouter un article
-S'il n'est pas connecté, il ne pourra que lire les articles #}        
-        {% if app.user and (is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')) %}
-            <div class="button-group">
-                <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
-            </div>
-        {% endif %}
-    </div>
+        </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
