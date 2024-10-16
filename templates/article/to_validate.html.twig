@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Articles à valider</h1>
-
+{# Affiche un message disant que l'article a bien été validé #}
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}

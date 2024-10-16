@@ -1,0 +1,38 @@
+.footer {
+    position: relative;
+    height: 165px;
+    background-color: black;
+    margin: 0;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.footer-left, .footer-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-footer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.linkFooter {
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.linkFooter:hover {
+    text-decoration: underline;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -41,6 +41,7 @@
         <div class="contenaireCard">
             {% set hasArticles = false %}
 
+           {# For each, en fonction de la catégorie choisie, l'article va s'afficher au bon endroit #}
             {% for article in articles %}
                 {% if article.categorie.nom == categorie %}
                     {% set hasArticles = true %}
@@ -51,7 +52,8 @@
                         <p class="event-contenu">{{ article.Contenu }}</p>
                         <p class="categorie">Catégorie : {{ article.categorie.nom }}</p> 
                         <div class="button-group">
-    {# Condition si l'utilisateur a un rôle admin et que l'article n'a pas été encore validé, on laisse le bouton modifier. Sinon il n'apparait plus #}
+    {# Condition si l'utilisateur a un rôle admin et que l'article n'a pas été encore validé, 
+    on laisse le bouton modifier. Sinon il n'apparait plus #}
     {% if app.user %}  
         {% if is_granted('ROLE_ADMIN') or not article.Validation %}
             <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>

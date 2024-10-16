@@ -22,6 +22,7 @@ final class Version20240925114521 extends AbstractMigration
                 // this up() migration is auto-generated, please modify it to your needs
         $this->addSql("INSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `email`, `password`, `roles`) VALUES
 (2, 'Pithion', 'Sara', 'kya0@hotmail.fr', '$2y$10\$GowSAefoSxrB8VDZpnWpie07oPOXB/SAC6jjX8enCxb2q7MMf91e.', '[\"ROLE_ADMIN\"]'),
+(19, 'Carter', 'Howard', 'moderateur@mail.fr', '$2y$10\$fBZlop098gTueOpVo99aEuTPseZLgMqnNMFbk/uARG4znpIcyOAEu', '[\"ROLE_MODERATOR\"]'),
 (6, 'Dupond', 'Marie', 'marie@mail.fr', '$2y$13\$uXCR5wIxQGrAzls2Bij6nuFpFe3JbB6KGazPzvUQVA8c72TkM1kx.', '[]');");
 
         $this->addSql("INSERT INTO `categorie` (`id`, `nom`) VALUES

@@ -1,15 +1,49 @@
+@media (max-width:768px){
+    .categorie1,
+    .categorie2,
+    .categorie3{
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
 .imageAccueil {
     background-image: url('/images/PhotoStatues.jpg');
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
-    height: 130vh;
-    width: 99vw;
+    height: 100vh;
+    width: 100vw;
     margin-bottom: 50px;
 }
 
+@media (max-width: 1024px) {
+    .imageAccueil {
+        background-size: contain; /* Garde toute l'image visible sans rognage */
+        height: auto; /* Laisse la hauteur s'adapter automatiquement */
+        min-height: 50vh; /* Garde au moins 50% de la hauteur de l'écran */
+        width: 100vw;
+    }
+}
+
+/* Pour les smartphones */
+@media (max-width: 600px) {
+    .imageAccueil {
+        height: auto;
+        background-size: contain; /* L'image est complètement visible */
+        background-position: top center; /* L'image est centrée verticalement et horizontalement */
+        width: 100vw;
+        min-height: 50vh; 
+    }
+}
+
 .texteAccueil {
-    font-size: 18px;
-    padding: 20px;
+    flex-direction: column;
+    width:90%;
+    margin: 20px auto;
+    height:auto;
+    font-size: 1.2rem;
+    padding: 2%;
 }
 
 .titreCategories {
@@ -35,7 +69,9 @@
 }
 
 .categorie1 img {
-    height: auto;
+    height: 100%;
+    width:auto;
+    max-width:100%;
     border-right: 2px solid #000;
     padding-right: 85px;
     padding-left: 50px;
@@ -64,7 +100,9 @@
 }
 
 .categorie2 img {
-    height: auto;
+    width:auto;
+    height: 100%;
+    max-width:100%;
     border-right: 2px solid #000;
     padding-right: 102px;
     padding-left: 50px;
@@ -95,8 +133,9 @@
 }
 
 .categorie3 img {
-    width: 26%;
+    width: auto;
     height: 100%;
+    max-width:100%;
     border-right: 2px solid #000;
     padding-right: 58px;
     padding-left: 50px;
@@ -111,10 +150,12 @@
     border: none;
 }
 
+@media (max-width: 480px){
 .titreEvènements {
     border-bottom: 2px;
-    font-size: 30px;
-    margin-left: 50px;
+    font-size: 24px;
+    margin-left:20px;
+}
 }
 
 .largeur1 {
@@ -167,10 +208,16 @@
     color: #fff;
     border-radius: 9px;
     padding: 20px;
-    font-size: 18px;
+    font-size: 14px;
     justify-content: space-between;
     height: 200px;
 }
+
+.texte-accueil img,
+    .texte-accueil p {
+        width: 100%; /* Chaque partie prend la largeur complète */
+        margin-bottom: 10px;
+    }
 
 .texte-accueil img {
     width: 45%;

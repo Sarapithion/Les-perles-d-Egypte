@@ -18,9 +18,16 @@ final class ArticleController extends AbstractController
     #[Route(name: 'app_article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
+       
+       //variable qui prend une valeur si la personne connecté est admin
         $isAdmin = $this->isGranted('ROLE_ADMIN');
+        
+        //affiche la page article index
         return $this->render('article/index.html.twig', [
+            //récupère tous les articles validés
             'articles' => $articleRepository->findBy(['Validation' => true]),
+
+            //renvoie si l'utilisateur est administrateur ou pas
             'isAdmin' => $isAdmin,
         ]);
     }
@@ -65,9 +72,10 @@ final class ArticleController extends AbstractController
         $article = new Article();
 
         $user = $this->getUser();
-
+        //Vérifie si l'utilisateur est connecté
         if ($user) {
             $article->setUtilisateur($user);
+        //Sinon retourne à la page d'accueil
         } else {
             header('Location : index.php');
         }
@@ -82,8 +90,7 @@ final class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
-            // Message flash
-            
+            // Une fois que tout s'est bien passé, on retourne sur la page article index
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
         }
 

@@ -1,10 +1,17 @@
 <div class="footer">
-    
-        <h1 class="title">PLAN DU SITE</h1>
-        </div>
-                <div class="buttonHeader">
-        <button class="button">Accueil</button>
-        <button class="button">Articles</button>
-        <button class="button">Evènements</button>
-        <button class="button">Contact</button>
+    <div class="footer-left">
+        <p class="title">PLAN DU SITE</p>
+        <nav class="nav-footer">
+            <a href="{{path('app_home')}}" class="linkFooter">Accueil</a>
+            <a href="{{path('app_article_index')}}" class="linkFooter">Articles</a>
+            <a href="{{path('app_evenement_index')}}" class="linkFooter">Evènements</a>
+            <a href="{{path('app_contact_index')}}"class="linkFooter">Contact</a>
+        </nav>
+    </div>
+
+    <div class="footer-right">
+            <a href="{{ path('legal_mentions') }}" class="linkFooter">Mentions légales</a>        
+            <a href="{{ path('privacy_policy') }}" class="linkFooter">Politique de confidentialité</a>
+
+    </div>
 </div>
