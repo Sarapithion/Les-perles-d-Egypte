@@ -1,14 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact index{% endblock %}
+{% block title %}Formulaire de contact{% endblock %}
 
 {% block body %}
+<div class="container">
+    <h1>Formulaire de contact</h1>
     
-
-    <h1>Page de contact</h1>
-{% if app.user %}
-    <p> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</p>
-
+    {% if app.user %}
+        <p>Bienvenue, {{ app.user.getPrenom() }} {{ app.user.getNom() }}!</p>
     {% else %}
         <p>Bienvenue, visiteur!</p>
     {% endif %}
@@ -37,8 +36,8 @@
                 <td>{{ contact.Prenom }}</td>
                 <td>{{ contact.Date ? contact.Date|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_contact_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">edit</a>
+                    <a href="{{ path('app_contact_show', {'id': contact.id}) }}">Voir</a>
+                    <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -49,5 +48,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_contact_new') }}">Create new</a>
+    <a href="{{ path('app_contact_new') }}">Ecrivez un message</a>
+</div>
 {% endblock %}
