@@ -12,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/contact')]
-final class ContactController extends AbstractController{
+final class ContactController extends AbstractController
+{
     #[Route(name: 'app_contact_index', methods: ['GET'])]
     public function index(ContactRepository $contactRepository): Response
     {
@@ -70,7 +71,7 @@ final class ContactController extends AbstractController{
     #[Route('/{id}', name: 'app_contact_delete', methods: ['POST'])]
     public function delete(Request $request, Contact $contact, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$contact->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $contact->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($contact);
             $entityManager->flush();
         }

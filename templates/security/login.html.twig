@@ -4,7 +4,7 @@
 
 {% block body %}
 <h1 class="h3 mb-3 font-weight-normal connexion ">Connectez-vous!</h1>
-<form method="post">
+<form class="login-form" method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -15,10 +15,14 @@
         </div>
     {% endif %}
 
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Mot de passe</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    <div class="login-input">
+        <label for="inputEmail">Email</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    </div>
+    <div class="login-input">
+        <label for="inputPassword">Mot de passe</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+    </div>
 
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"

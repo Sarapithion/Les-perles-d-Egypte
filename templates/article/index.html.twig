@@ -9,12 +9,11 @@
 </div>
 
 {% if app.user %}
-    <p> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</p>
-{% else %}
-    <p>Bienvenue, visiteur!</p>
+    <h1 class="welcome-text"> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</h1>
 {% endif %}
 <br>
-{% if isAdmin %}
+{# Si l'utilisateur est admin ou modérateur, il peut voir le bouton articles à valider #}
+{% if isAdmin or app.user and is_granted('ROLE_MODERATOR') %}
     <a href="{{ path('app_article_to_validate') }}" class="btn btn-primary">
         Articles à valider
     </a>
@@ -52,13 +51,13 @@
                         <p class="event-contenu">{{ article.Contenu }}</p>
                         <p class="categorie">Catégorie : {{ article.categorie.nom }}</p> 
                         <div class="button-group">
-    {# Condition si l'utilisateur a un rôle admin et que l'article n'a pas été encore validé, 
+    {# Condition si l'utilisateur a un rôle admin ou modérateur et que l'article n'a pas été encore validé, 
     on laisse le bouton modifier. Sinon il n'apparait plus #}
-    {% if app.user %}  
-        {% if is_granted('ROLE_ADMIN') or not article.Validation %}
-            <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
-        {% endif %}
+   {% if app.user %}  
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MODERATOR') or not article.Validation %}
+        <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
     {% endif %}
+{% endif %}
     {# Consition si l'utilisateur a un role admin et que les articles n'ont pas encore été validés, le bouton reste présent. Sinon il disparait #}
     {% if is_granted('ROLE_ADMIN') and not article.Validation %}
         <a class="bouton fondBouton" href="{{ path('app_article_valid_event', {'id': article.id}) }}" 

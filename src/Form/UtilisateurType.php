@@ -54,12 +54,7 @@ class UtilisateurType extends AbstractType
             ],
         ]);
 
-            // ->add('Role')
-            // ->add('Evenement', EntityType::class, [
-                // 'class' => Evenement::class,
-                // 'choice_label' => 'id',
-                // 'multiple' => true,
-            // ])
+           
         ;
     }
 

@@ -5,9 +5,32 @@
 }
 .titreInscription{
     padding:30px;
+    padding-top: 0;
 }
 
 .inscription input{
     margin-bottom: 20px;
 }
 
+.inscription form {
+    margin-top: 0;
+    margin-bottom: 70px;
+}
+
+
+.welcome-text.new-welcome {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.inscription form div {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-bottom: 8px;
+}
+
+.inscription form div input {
+    padding: 8px;
+}

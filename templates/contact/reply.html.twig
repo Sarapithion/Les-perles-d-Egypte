@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Répondre au message{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Répondre au message de {{ contact.email }}</h1>
+    
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit">Envoyer la réponse</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

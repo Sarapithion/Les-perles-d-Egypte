@@ -4,5 +4,43 @@
     margin: 0;
 }
 body{
-    	background-color: #F5F5F5
+    	background-color: #F5F5F5;
+        font-family: Ubuntu;
+}
+
+h1, h2, h3 {
+    font-family: Dekko;
+}
+
+/* FONTS */
+@font-face {
+    font-family: Dekko;
+    src: url(/fonts/Dekko-Regular.ttf);
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url(/fonts/ubuntu/Ubuntu-Regular.ttf);
+}
+
+/* BUTTON */
+.btn-primary {
+    padding: 3px 16px;
+    background-color: #E4C520;
+    color: black;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: Ubuntu;
+    transition: all .2s ease;
+}
+.btn-primary:hover {
+    background-color: #ffe550;
+}
+
+
+/* Style pour le bouton actif */
+.button.active {
+    background-color: #ffe550; 
+    font-weight: bold; 
 }

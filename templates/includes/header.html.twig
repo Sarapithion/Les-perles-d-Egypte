@@ -9,17 +9,24 @@
                 </a>
         
         </div>
+        {# condition si app.request: variable globale dans Twig qui contient des informations sur la requête HTTP en cours.
+        attributes contient les attributs de la requête, dont _route indique le nom de la route à laquelle l'utilisateur a accédé).
+'app_article_index' :vérifie si la route actuelle (obtained from _route) est la même que celle du lien (c'est-à-dire app_article_index).
+active .Si l'utilisateur se trouve sur la page de app_article_index), le mot active sera ajouté au nom de la classe du lien.
+app.css#}
+
         <div class="buttonHeader">
-                <a href="{{path('app_article_index')}}" class="button">Articles</a>
-                <a href="{{path('app_evenement_index')}}" class="button">Evènements</a>
-                <a href="{{path('app_contact_index')}}"class="button">Contact</a>
-                {% if app.user %}
-                
-                <a href="{{path('app_logout')}}"class="button">Deconnexion</a>
-                {% else %}
-                       <a href="{{path('app_utilisateur_new')}}"class="button">Inscription</a> 
-                       <a href="{{path('app_login')}}"class="button">Connexion</a>
-                {% endif %}
+    <a href="{{ path('app_article_index') }}" class="button {% if app.request.attributes.get('_route') == 'app_article_index' %}active{% endif %}">Articles</a>
+    <a href="{{ path('app_evenement_index') }}" class="button {% if app.request.attributes.get('_route') == 'app_evenement_index' %}active{% endif %}">Evènements</a>
+    <a href="{{ path('app_contact_index') }}" class="button {% if app.request.attributes.get('_route') == 'app_contact_index' %}active{% endif %}">Contact</a>
+
+    {% if app.user %}
+        <a href="{{ path('app_logout') }}" class="button">Déconnexion</a>
+    {% else %}
+        <a href="{{ path('app_utilisateur_new') }}" class="button inscription-button {% if app.request.attributes.get('_route') == 'app_utilisateur_new' %}active{% endif %}">Inscription</a>
+        <a href="{{ path('app_login') }}" class="button {% if app.request.attributes.get('_route') == 'app_login' %}active{% endif %}">Connexion</a>
+    {% endif %}
+</div>
                         
         </div>
 </div>

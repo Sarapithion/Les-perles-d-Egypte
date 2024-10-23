@@ -1,27 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Evènements{% endblock %}
+{% block title %}Événements{% endblock %}
 
 {% block body %}
+    <h1>Page à venir</h1>
 
-    <h1>Evènements</h1>
-
-{% if app.user %}
-    <p> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</p>
-
-    {% else %}
-        <p>Bienvenue, visiteur!</p>
-    {% endif %}
     <table class="table">
         <thead>
             <tr>
-                {# <th>Id</th> #}
+                <th>Id</th>
                 <th>Titre</th>
                 <th>Date</th>
-                <th>Resume</th>
+                <th>Résumé</th>
                 <th>Contenu</th>
                 <th>Validation</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -33,11 +26,11 @@
                 <td>{{ evenement.Resume }}</td>
                 <td>{{ evenement.Contenu }}</td>
                 <td>
-                     <a href="{{ path('app_evenement_valid_event', {'id': evenement.id}) }}" onclick="event.preventDefault(); document.getElementById('validate-event-{{ evenement.id }}').submit();">Valider</a>
-            <form id="validate-event-{{ evenement.id }}" action="{{ path('app_evenement_valid_event', {'id': evenement.id}) }}" method="POST" style="display: none;">
-                <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ evenement.id) }}">
-            </form>
-            <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
+                    <a href="{{ path('app_evenement_valid_event', {'id': evenement.id}) }}" onclick="event.preventDefault(); document.getElementById('validate-event-{{ evenement.id }}').submit();">Valider</a>
+                    <form id="validate-event-{{ evenement.id }}" action="{{ path('app_evenement_valid_event', {'id': evenement.id}) }}" method="POST" style="display: none;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ evenement.id) }}">
+                    </form>
+                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -48,5 +41,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_evenement_new') }}">Créer un nouvel évènement</a>
+    {# <a href="{{ path('app_evenement_new') }}">Créer un nouvel évènement</a> #}
 {% endblock %}

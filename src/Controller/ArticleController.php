@@ -18,24 +18,31 @@ final class ArticleController extends AbstractController
     #[Route(name: 'app_article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
-       
-       //variable qui prend une valeur si la personne connecté est admin
+        // Variable qui prend une valeur si la personne connectée est admin
         $isAdmin = $this->isGranted('ROLE_ADMIN');
-        
-        //affiche la page article index
+
+        // Variable qui prend une valeur si la personne connectée est modérateur
+        $isModerator = $this->isGranted('ROLE_MODERATOR');
+
+        // Affiche la page article index
         return $this->render('article/index.html.twig', [
-            //récupère tous les articles validés
+            // Récupère tous les articles validés
             'articles' => $articleRepository->findBy(['Validation' => true]),
 
-            //renvoie si l'utilisateur est administrateur ou pas
+            // Renvoie si l'utilisateur est administrateur ou modérateur
             'isAdmin' => $isAdmin,
+            'isModerator' => $isModerator, // Ajoutez cette ligne
         ]);
     }
-
+// Route to-validate pour valider les articles, seul un administrateur ou un modérateur peut faire cela
     #[Route('/to-validate', name: 'app_article_to_validate', methods: ['GET'])]
-    #[IsGranted("ROLE_ADMIN", message: "Vous n'avez pas le droit d'accéder à cette page")]
     public function toValidate(ArticleRepository $articleRepository): Response
     {
+        // Vérifie si l'utilisateur a un des rôles nécessaires
+        if (!$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_MODERATOR')) {
+            throw $this->createAccessDeniedException("Vous n'avez pas le droit d'accéder à cette page");
+        }
+
         $articlesToValidate = $articleRepository->findBy(['Validation' => false]);
 
         return $this->render('article/to_validate.html.twig', [

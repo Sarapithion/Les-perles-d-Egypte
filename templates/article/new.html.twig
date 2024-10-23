@@ -3,9 +3,18 @@
 {% block title %}New Article{% endblock %}
 
 {% block body %}
-    <h1>Créer un article</h1>
+    <div class="article-form">
+        <h1>Créer un article</h1>
 
-    {{ include('article/_form.html.twig') }}
+        {{ include('article/_form.html.twig') }}
 
-    <a href="{{ path('app_article_index') }}">Retourner à la liste</a>
+        <div class="button-group-horizontal">
+            <a href="{{ path('app_article_index') }}" class="btn btn-return button-margin">Retourner à la liste</a>
+            {% if article is defined and article.id is not empty %}
+                {{ include('article/_delete_form.html.twig', {'article': article}) }}
+            {% else %}
+                <p>Aucun article à supprimer.</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

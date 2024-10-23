@@ -3,11 +3,21 @@
 {% block title %}Edit Article{% endblock %}
 
 {% block body %}
-    <h1>Modifier un article</h1>
+    <div class="article-edit"> 
+        <h1>Modifier un article</h1>
 
-    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('article/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('app_article_index') }}">Retourner à la liste</a>
-
-    {{ include('article/_delete_form.html.twig') }}
+        <div class="button-group">
+            <a href="{{ path('app_article_index') }}" class="btn btn-return button-margin">Retourner à la liste</a>
+            {% if article.id is not empty %}
+                <form method="post" action="{{ path('app_article_delete', {'id': article.id}) }}" onsubmit="return confirm('Etes-vous sûr de vouloir supprimer cet article?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
+                    <button class="btn btn-delete">Supprimer</button>
+                </form>
+            {% else %}
+                <p>Aucun article à supprimer.</p>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

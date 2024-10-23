@@ -35,3 +35,9 @@
     display: flex;
     align-items: center;
 }
+
+
+.buttonHeader {
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,66 @@
+/* Styles généraux pour la création et la modification d'articles */
+.article-form, .article-edit {
+    padding: 30px;
+    width: fit-content;
+    margin: auto;
+}
+
+.article-form h1, .article-edit h1 {
+    padding: 30px;
+    padding-top: 0;
+}
+
+.article-form input, .article-edit input {
+    margin-bottom: 20px;
+}
+
+.article-form form, .article-edit form {
+    margin-top: 0;
+    margin-bottom: 70px;
+}
+
+.button-group-horizontal, .button-group {
+    margin-top: 20px; 
+}
+
+.button-group-horizontal, .button-group {
+    display: flex;
+    flex-direction: column; 
+    gap: 10px; 
+}
+/* Flexbox pour les divs de formulaire */
+.article-form form div, .article-edit form div {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-bottom: 8px;
+}
+
+.article-form form div input, .article-edit form div input {
+    padding: 8px;
+}
+
+.btn-return {
+    background-color: #E4C520; 
+    color: #ffffff;
+    padding: 8px 12px; 
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-return:hover {
+    background-color: #3f5cd0; 
+}
+
+.btn-delete {
+    background-color: #ff4c4c; 
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-delete:hover {
+    background-color: #e73e3e; 
+}

@@ -4,10 +4,7 @@
 
 {% block body %}
  {% if app.user %}
-    <p> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</p>
-
-    {% else %}
-        <p>Bienvenue, visiteur!</p>
+    <h1 class="welcome-text new-welcome"> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</h1>
     {% endif %}
        
     <div class="inscription">

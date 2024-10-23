@@ -7,47 +7,54 @@
     <h1>Formulaire de contact</h1>
     
     {% if app.user %}
-        <p>Bienvenue, {{ app.user.getPrenom() }} {{ app.user.getNom() }}!</p>
-    {% else %}
-        <p>Bienvenue, visiteur!</p>
+        <h1 class="welcome-text">Bienvenue, {{ app.user.getPrenom() }} {{ app.user.getNom() }}!</h1>
     {% endif %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Objet</th>
-                <th>Message</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Date</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for contact in contacts %}
-            <tr>
-                <td>{{ contact.id }}</td>
-                <td>{{ contact.Email }}</td>
-                <td>{{ contact.Objet }}</td>
-                <td>{{ contact.Message }}</td>
-                <td>{{ contact.Nom }}</td>
-                <td>{{ contact.Prenom }}</td>
-                <td>{{ contact.Date ? contact.Date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_contact_show', {'id': contact.id}) }}">Voir</a>
-                    <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% if app.user and (is_granted('ROLE_ADMIN') or is_granted('ROLE_MODERATOR')) %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Objet</th>
+                    <th>Message</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Date</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.Email }}</td>
+                    <td>{{ contact.Objet }}</td>
+                    <td>{{ contact.Message }}</td>
+                    <td>{{ contact.Nom }}</td>
+                    <td>{{ contact.Prenom }}</td>
+                    <td>{{ contact.Date ? contact.Date|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_contact_show', {'id': contact.id}) }}">Voir</a>
+                        <a href="{{ path('app_contact_edit', {'id': contact.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Vous avez une question? Une suggestion à nous proposer? 
+        <br>
+        <br>
+        Remplissez ce formulaire pour nous contacter</p>
+    {% endif %}
 
-    <a href="{{ path('app_contact_new') }}">Ecrivez un message</a>
+    {% if not (is_granted('ROLE_ADMIN') or is_granted('ROLE_MODERATOR')) %}
+        <a href="{{ path('app_contact_new') }}">Écrivez un message</a>
+    {% endif %}
 </div>
 {% endblock %}
