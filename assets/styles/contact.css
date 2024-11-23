@@ -31,6 +31,7 @@ h1 {
 .welcome-text {
     font-size: 3em;
     margin-top: 0; /* Ajusté pour correspondre au style de bienvenue */
+    margin-bottom: 0;
 }
 
 /* Styles du formulaire de contact pour ressembler à l'inscription */
@@ -46,7 +47,7 @@ h1 {
     text-align: center; /* Aligne le titre au centre */
 }
 
-.contact-form input, 
+.contact-form input,
 .contact-form textarea {
     margin-bottom: 20px; /* Espacement entre les champs */
     padding: 8px; /* Espacement intérieur des champs */
@@ -60,7 +61,7 @@ h1 {
 }
 
 .contact-form button {
-    background-color: #E4C520;
+    background-color: #e4c520;
     color: black;
     padding: 10px;
     border: none;
@@ -81,7 +82,8 @@ h1 {
     margin-top: 20px;
 }
 
-.table th, .table td {
+.table th,
+.table td {
     padding: 12px;
     border: 1px solid #ddd;
     text-align: center;
@@ -89,7 +91,7 @@ h1 {
 }
 
 .table th {
-    background-color: #E4C520;
+    background-color: #e4c520;
     color: white;
 }
 
@@ -117,7 +119,7 @@ a[href*='new']:not(.inscription-button) {
     width: 200px;
     margin: 20px auto;
     text-align: center;
-    background-color: #E4C520;
+    background-color: #e4c520;
     color: black;
     padding: 10px 0;
     border-radius: 5px;

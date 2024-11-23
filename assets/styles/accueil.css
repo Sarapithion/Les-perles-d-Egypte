@@ -1,20 +1,20 @@
-@media (max-width:768px){
+@media (max-width: 768px) {
     .categorie1,
     .categorie2,
-    .categorie3{
+    .categorie3 {
         flex-direction: column;
         width: 100%;
     }
 }
 
 .imageAccueil {
-    background-image: url('/images/PhotoStatues.jpg');
+    background-image: linear-gradient(to left, transparent, #f5f5f5 85%),
+        url('../../images/boat.jpeg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: auto;
     width: 100vw;
-    margin-bottom: 50px;
 }
 
 @media (max-width: 1024px) {
@@ -33,21 +33,22 @@
         background-size: contain; /* L'image est complètement visible */
         background-position: top center; /* L'image est centrée verticalement et horizontalement */
         width: 100vw;
-        min-height: 50vh; 
+        min-height: 50vh;
     }
 }
 
 .texteAccueil {
+    padding-top: 0;
     flex-direction: column;
-    width:90%;
+    width: 90%;
     margin: 20px auto;
-    height:auto;
+    margin-top: 0;
+    height: auto;
     font-size: 1.2rem;
     padding: 2%;
 }
 
 .titreCategories {
-    margin-top: 50px;
     border-bottom: 2px;
 }
 
@@ -70,8 +71,8 @@
 
 .categorie1 img {
     height: 100%;
-    width:auto;
-    max-width:100%;
+    width: auto;
+    max-width: 100%;
     border-right: 2px solid #000;
     padding-right: 85px;
     padding-left: 50px;
@@ -100,9 +101,9 @@
 }
 
 .categorie2 img {
-    width:auto;
+    width: auto;
     height: 100%;
-    max-width:100%;
+    max-width: 100%;
     border-right: 2px solid #000;
     padding-right: 102px;
     padding-left: 50px;
@@ -136,7 +137,7 @@
 .categorie3 img {
     width: auto;
     height: 100%;
-    max-width:100%;
+    max-width: 100%;
     border-right: 2px solid #000;
     padding-right: 58px;
     padding-left: 50px;
@@ -151,12 +152,12 @@
     border: none;
 }
 
-@media (max-width: 480px){
-.titreEvènements {
-    border-bottom: 2px;
-    font-size: 24px;
-    margin-left:20px;
-}
+@media (max-width: 480px) {
+    .titreEvènements {
+        border-bottom: 2px;
+        font-size: 24px;
+        margin-left: 20px;
+    }
 }
 
 .largeur1 {
@@ -174,8 +175,8 @@
     line-height: 1, 8px;
     border-radius: 9px;
     padding: 20px;
-    position:relative;
-    margin:5px 20px;
+    position: relative;
+    margin: 5px 20px;
 }
 
 .actualité1 p {
@@ -200,67 +201,87 @@
     align-items: center;
 }
 
-
 .home-categories {
-    flex-direction: row;
+    flex-direction: column;
     width: unset;
+}
+
+.categories-container {
+    align-items: baseline;
+}
+
+.categories-title {
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .titreEvènements {
     margin-left: 80px;
 }
 
-
 .texte-accueil {
     display: flex;
     align-items: center;
     margin: 30px auto;
-    width: 45%;
-    background-color: #000;
+    margin-top: 0;
+    width: 100%;
+    background-color: transparent;
     color: #fff;
     border-radius: 9px;
     padding: 20px;
     font-size: 14px;
     justify-content: space-between;
-    height: 200px;
-   
+    max-width: 1500px;
     height: unset;
-  
 }
 
 .texte-accueil img,
-    .texte-accueil p {
-        width: 100%; /* Chaque partie prend la largeur complète */
-        margin-bottom: 10px;
-    }
+.texte-accueil p {
+    width: 100%; /* Chaque partie prend la largeur complète */
+    margin-bottom: 10px;
+}
 
 .texte-accueil img {
+    order: 1;
     width: 45%;
-
-    
     max-width: 350px;
-    width: 100%;
-    height: 240px;
-  
-
+    width: auto;
+    height: auto;
     object-fit: contain;
+    border-radius: 10%;
+    box-shadow: gray 10px 10px 50px;
 }
 
 .texte-accueil p {
-    width: 45%;
-    font-size: 16px;
+    order: 2;
+    width: 40%;
+    font-size: 22px;
     object-fit: cover;
-    
     text-align: justify;
-    color: rgb(231, 231, 231);
-    line-height: 22px;
-   
+    color: black;
+    line-height: 40px;
+    font-weight: 700;
 }
 
 .textes-conteneurs {
     display: flex;
+    flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
 }
 
+.textes-conteneurs .texte-accueil:nth-child(2) p {
+    order: 1;
+}
 
+.textes-conteneurs .texte-accueil:nth-child(2) img {
+    order: 2;
+    height: 240px;
+    margin-right: 200px;
+}

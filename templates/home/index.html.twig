@@ -3,90 +3,81 @@
 {% block title %}Les perles d'Égypte{% endblock %}
 
 {% block header %}
-    <style>
-        .imageAccueil {
-            background-image: url('{{ asset('/images/PhotoStatues.jpg') }}') !important;
-        }
-    </style>
-    <div class="imageAccueil">
-        {% include('includes/header.html.twig') %}
-
-        {% if app.user %}
-            <h1 class="welcome-text">Bienvenue, {{ app.user.getPrenom() }} {{ app.user.getNom() }}!</h1>
-        {% endif %}
-
-        <!-- Affichage des messages flash -->
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">{{ message }}</div>
-        {% endfor %}
-
-        {% for message in app.flashes('denied access validate') %}
-            <div class="alert alert-danger">{{ message }}</div> <!-- Change bg-success en alert-danger -->
-        {% endfor %}
-    </div>
-{% endblock %}
-
-
-                
+    {% include('includes/header.html.twig') %}
+{% endblock %}       
 
 {% block body %}
 
+        <div class="imageAccueil">
+                {% if app.user %}
+                        <h1 class="welcome-text">Bienvenue, {{ app.user.getPrenom() }} {{ app.user.getNom() }}!</h1>
+                {% endif %}
 
-<div class="texteAccueil">
+                <!-- Affichage des messages flash -->
+                {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
 
-        <h1> Bienvenue sur les perles d'Egypte </h1> 
+                {% for message in app.flashes('denied access validate') %}
+                        <div class="alert alert-danger">{{ message }}</div> <!-- Change bg-success en alert-danger -->
+                {% endfor %}
 
+                <div class="texteAccueil">
+                        <div class="textes-conteneurs">
+                                <div class="texte-accueil">
 
-        <div class="textes-conteneurs">
-                <div class="texte-accueil">
-
-                        <img src="/images/boat.jpeg" alt="Icône d'un pharaon"/>
-
-
-                        <p> Oserez-vous pénétrer les merveilles d'une civilisation qui, des millénaires plus tard, continue de surprendre notre imaginaire ? Ici, sur Les perles d’Egypte, chaque pierre, chaque hiéroglyphe, chaque découverte résonne d'une histoire oubliée, d'un secret enfoui dans les sables du temps.
-
-                        </p>
-                </div>
-                <div class="texte-accueil">
+                                        <img src="/images/PhotoStatues.jpg" alt="Icône d'un pharaon"/>
 
 
-                                <p>L'Égypte ancienne ne se révèle qu'à ceux qui savent écouter.  <br>Ce lieu est plus qu'un simple site d'actualités. C'est une porte vers l'inconnu, une invitation à vous perdre dans les dédales d'une culture millénaire. Ici, les dernières découvertes archéologiques côtoient les légendes, et chaque article est une clé pour déverrouiller un fragment du passé. 
-                                </p>
-                                <img src="/images/pharaon.jpeg" alt="Icône d'un pharaon"/>
+                                        <p> Oserez-vous pénétrer les merveilles d'une civilisation qui, des millénaires plus tard, continue de surprendre notre imaginaire ? Ici, sur Les perles d’Egypte, chaque pierre, chaque hiéroglyphe, chaque découverte résonne d'une histoire oubliée, d'un secret enfoui dans les sables du temps.
 
-                </div>
-                <div class="texte-accueil">
-                        <p>
-                        Découvrez aussi les évènements qui se déroulent près de chez vous.
-                        Entrez, explorez, et laissez-vous charmer par les échos d'une Égypte antique que vous n'avez jamais connue... jusqu'à aujourd'hui.
-                        </p>
-                        <img src="/images/sphinx.jpeg" alt="Icône d'un pharaon"/>
+                                        </p>
+                                </div>
+                                <div class="texte-accueil">
 
+
+                                                <p>L'Égypte ancienne ne se révèle qu'à ceux qui savent écouter.  <br>Ce lieu est plus qu'un simple site d'actualités. C'est une porte vers l'inconnu, une invitation à vous perdre dans les dédales d'une culture millénaire. Ici, les dernières découvertes archéologiques côtoient les légendes, et chaque article est une clé pour déverrouiller un fragment du passé. 
+                                                </p>
+                                                <img src="/images/pharaon.jpeg" alt="Icône d'un pharaon"/>
+
+                                </div>
+                                <div class="texte-accueil">
+                                        <p>
+                                                Découvrez aussi les évènements qui se déroulent près de chez vous.
+                                                Entrez, explorez, et laissez-vous charmer par les échos d'une Égypte antique que vous n'avez jamais connue... jusqu'à aujourd'hui.
+                                        </p>
+                                        <img src="/images/sphinx.jpeg" alt="Icône d'un pharaon"/>
+
+                                </div>
+                        </div>
                 </div>
         </div>
+
+<div class="categories-container home-categories">
+        <div class="categories-title">
                 <h2 class="titreCategories"> Catégories d'articles </h2> 
                 <hr class="largeur"/>
-
-
-</div>
-<div class="categories-container home-categories">
-        <div class="categorie1">
-                <img src="{{ asset('images/iconePyramides.png') }}" alt="Pyramides avec soleil">
-
-                <button>Actualités</button>
-        </div>
-    
-        <div class="categorie2">
-                <img src="{{ asset('images/iconePharaon.png') }}" alt="Icône d'un pharaon">
-
-                <button>Personnages</button>
-
         </div>
 
-        <div class="categorie3">
-                <img src="{{ asset('images/iconeFemme.png') }}" alt="Icône d'une femme égyptienne">
-                <button>Vie quotidienne</button>
+        <div class="categories">
+                <div class="categorie1">
+                        <img src="{{ asset('images/iconePyramides.png') }}" alt="Pyramides avec soleil">
 
+                        <button>Actualités</button>
+                </div>
+        
+                <div class="categorie2">
+                        <img src="{{ asset('images/iconePharaon.png') }}" alt="Icône d'un pharaon">
+
+                        <button>Personnages</button>
+
+                </div>
+
+                <div class="categorie3">
+                        <img src="{{ asset('images/iconeFemme.png') }}" alt="Icône d'une femme égyptienne">
+                        <button>Vie quotidienne</button>
+
+                </div>
         </div>
 </div>
 
