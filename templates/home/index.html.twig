@@ -54,46 +54,28 @@
         </div>
 
 <div class="categories-container home-categories">
-        <div class="categories-title">
-                <h2 class="titreCategories"> Catégories d'articles </h2> 
-                <hr class="largeur"/>
+    <div class="categories-title">
+        <h2 class="titreCategories">Accédez à nos différents articles</h2> 
+        <hr class="largeur"/>
+    </div>
+
+    <div class="categories">
+        <div class="categorie1">
+            <img src="{{ asset('images/iconePyramides.png') }}" alt="Pyramides avec soleil">
+            <a href="{{ path('app_article_index') }}" class="buttonHome">Actualités</a>
         </div>
 
-        <div class="categories">
-                <div class="categorie1">
-                        <img src="{{ asset('images/iconePyramides.png') }}" alt="Pyramides avec soleil">
-
-                        <button>Actualités</button>
-                </div>
-        
-                <div class="categorie2">
-                        <img src="{{ asset('images/iconePharaon.png') }}" alt="Icône d'un pharaon">
-
-                        <button>Personnages</button>
-
-                </div>
-
-                <div class="categorie3">
-                        <img src="{{ asset('images/iconeFemme.png') }}" alt="Icône d'une femme égyptienne">
-                        <button>Vie quotidienne</button>
-
-                </div>
+        <div class="categorie2">
+            <img src="{{ asset('images/iconePharaon.png') }}" alt="Icône d'un pharaon">
+            <a href="{{ path('app_article_index') }}" class="buttonHome">Personnages</a>
         </div>
+
+        <div class="categorie3">
+            <img src="{{ asset('images/iconeFemme.png') }}" alt="Icône d'une femme égyptienne">
+            <a href="{{ path('app_article_index') }}" class="buttonHome">Vie quotidienne</a>
+        </div>
+    </div>
 </div>
 
-<div>
-        <h2 class="titreEvènements"> Nos prochains évènements </h2> 
-        <hr class="largeur1"/>
 
-
-        <div class="actus">
-                <div class="actualité1"> 
-
-                        <p class="event-title">Conférence sur le thème "Les dernières tombes découvertes"<p>
-                        <p class="event-date">Le 25 septembre 2024  </p> 
-
-                </div>
-        </div>   
-
-</div>
 {% endblock %}

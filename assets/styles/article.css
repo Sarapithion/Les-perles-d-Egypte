@@ -21,63 +21,199 @@ align-items: center;
    background-color: #E4C520;
    color: white;
    text-decoration: none;
+  
 }
 
-.categorieArticles{
- display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff8d4;
-    border: 1px solid #000;
-    border-radius: 24px;
-    width: fit-content;
-    height: 159px;
-    margin: auto;
-    margin-bottom: 6%;
-    
+/* Conteneur principal pour les catégories */
+.categories-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 20px;
 }
 
-.categorieArticles img {
-    height: auto;
-    border-right: 2px solid #000;
-    padding-right: 102px;
-    padding-left: 50px;
-    height: 100%;
-    background-color: #fff8d4;
-}
-
-.categorieArticles button {
-    font-size: 24px;
+/* Conteneur pour chaque catégorie (image + articles) */
+.categorie-block {
+    flex: 1;
+    max-width: 30%;
     text-align: center;
-    padding-left: 57px;
-    padding-right: 57px;
-    background-color: #fff8d4;
-    border: none;
+    margin-bottom: 30px;
 }
 
-.categories-container{
-   display: flex;
-   flex-direction: column;
-   width: 100%;
+/* En-tête de la catégorie (image + texte) */
+.categorie-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFF8D4;
+  border-radius: 7px;
+  padding: 22px;
+  width: 82%;
+  box-sizing: border-box;
+  margin-bottom: 50px;
+}
+
+/* Carré autour de l'image (intérieur avec bordure noire) */
+.categorie-header .inner-image-container {
+  width: 160px;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: inherit;
+  background-color: white;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+
+/* Image des catégories */
+.categorie-header img {
+    width: 100%;
+    height: auto;
+    background: #FFF8D4;
+}
+
+/* Conteneur pour le texte sous l'image */
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+/* Texte des catégories (nom de la catégorie) */
+.categorie-title {
+    font-size: 30px;
+    color: black;
+    margin-bottom: 5px;
+}
+
+/* Description sous le titre de la catégorie */
+.categorie-description {
+    font-size: 15px; 
+    color: black;
+    line-height: 1.4;
+    margin-top: 10px;
+    max-width: 230px;
+    text-align: center;
+}
+
+/* Ligne noire sous chaque catégorie */
+.categorie-header .line {
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    margin-top: 20px;
+}
+
+/* Style des articles */
+.article {
+    position: relative; /* Nécessaire pour positionner les éléments internes avec position absolute de .categorie" */
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+    max-width: 433px;
+    min-height: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
 }
 
 
-.titreArticle{
+    
+
+.article p {
+    margin: 5px 0;
+}
+
+/* Titre de l'article */
+.titreArticle {
     font-size: 18px;
     font-weight: bold;
+    color: black;
+    margin-bottom: 10px;
 }
 
-.date{
+/* Date de l'article */
+.date {
+    font-size: 14px;
     color: #777;
+    margin-bottom: 15px;
 }
 
+/* Résumé de l'article */
+.event-resume {
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    line-height: 1.5;
+    margin-bottom: 25px; /* Espacement sous le résumé */
+}
+
+/* Contenu de l'article */
+.event-contenu {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.8;
+    margin-top: 20px; /* Espacement supplémentaire entre le résumé et le contenu */
+}
+
+
+.categorie {
+    position: absolute; /* Me positionne par rapport à .article */
+    bottom: 10px;       /* Distance depuis le bas du conteneur */
+    right: 10px;        /* Distance depuis le bord droit du conteneur */
+    font-size: 14px;
+    color: #555;
+    margin: 0; /* Me supprime tout éventuel margin pour éviter des décalages */
+}
+
+/* Groupe de boutons */
 .button-group {
-    margin-left: 50px;
-   
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center;    /* Centre verticalement */
+    margin-top: 20px;
+    padding: 3px 16px;
 }
-.contenaireCard{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: space-around;
-    margin-bottom: 60px;
+
+.button-group .bouton {
+    background-color: #E4C520;
+    color: black;
+    border-radius: 24px;
+    padding: 8px 20px;
+    margin-right: 10px;
+    box-shadow: 10px 5px 5px black;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+.button-group .bouton:hover {
+    background-color: #C7A019; 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Si aucun article n'est trouvé */
+.no-articles {
+    font-style: italic;
+    color: #888;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
+/* Ligne sous la date et heure */
+.date-line {
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    margin-top: 10px; /* Ajoute un peu d'espace avant la ligne */
+    margin-bottom: 15px; /* Ajoute un peu d'espace après la ligne */
+}
+

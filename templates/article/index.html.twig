@@ -8,10 +8,8 @@
     <h1>Articles</h1>
 </div>
 
-{% if app.user %}
-    <h1 class="welcome-text"> Bienvenue, {{ app.user.getPrenom()}} {{ app.user.getNom() }}!</h1>
-{% endif %}
 <br>
+
 {# Si l'utilisateur est admin ou modérateur, il peut voir le bouton articles à valider #}
 {% if isAdmin or app.user and is_granted('ROLE_MODERATOR') %}
     <a href="{{ path('app_article_to_validate') }}" class="btn btn-primary">
@@ -19,6 +17,7 @@
     </a>
 {% endif %}
 
+{# Affichage des messages de succès et info #}
 {% for message in app.flashes('success') %}
     <div class="alert alert-success">
         {{ message }}
@@ -32,58 +31,91 @@
 {% endfor %}
 
 <div class="categories-container">
-    {% for categorie in ['Actualités', 'Personnages', 'Vie quotidienne'] %}
-        <div class="categorieArticles">
-            <img src="{{ asset('images/icone' ~ (categorie == 'Actualités' ? 'Pyramides' : (categorie == 'Personnages' ? 'Pharaon' : 'Femme')) ~ '.png') }}" alt="Icône {{ categorie }}">
-            <button>{{ categorie }}</button>
-        </div>
-        <div class="contenaireCard">
-            {% set hasArticles = false %}
-
-           {# For each, en fonction de la catégorie choisie, l'article va s'afficher au bon endroit #}
-            {% for article in articles %}
-                {% if article.categorie.nom == categorie %}
-                    {% set hasArticles = true %}
-                    <div class="actualité1 p img"> 
-                        <p class="titreArticle">{{ article.Titre }}</p>
-                        <p class="date">{{ article.Date ? article.Date|date('Y-m-d H:i:s') : '' }}</p> 
-                        <p class="event-resume">{{ article.Resume }}</p>
-                        <p class="event-contenu">{{ article.Contenu }}</p>
-                        <p class="categorie">Catégorie : {{ article.categorie.nom }}</p> 
-                        <div class="button-group">
-    {# Condition si l'utilisateur a un rôle admin ou modérateur et que l'article n'a pas été encore validé, 
-    on laisse le bouton modifier. Sinon il n'apparait plus #}
-   {% if app.user %}  
-    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MODERATOR') or not article.Validation %}
-        <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
-    {% endif %}
-{% endif %}
-    {# Consition si l'utilisateur a un role admin et que les articles n'ont pas encore été validés, le bouton reste présent. Sinon il disparait #}
-    {% if is_granted('ROLE_ADMIN') and not article.Validation %}
-        <a class="bouton fondBouton" href="{{ path('app_article_valid_event', {'id': article.id}) }}" 
-           onclick="event.preventDefault(); document.getElementById('validate-article-{{ article.id }}').submit();">Valider</a>
-        <form id="validate-article-{{ article.id }}" action="{{ path('app_article_valid_event', {'id': article.id}) }}" method="POST" style="display: none;">
-            <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ article.id) }}">
-        </form>
-    {% endif %}
-</div>
+    {% for categorie in ['Actualités', 'Vie quotidienne', 'Personnages'] %}
+        <div class="categorie-block">
+            <div class="categorie-header">
+                <!-- Premier carré autour de l'image (extérieur, fond jaune et bordure noire) -->
+                <div class="outer-image-container">
+                    <!-- Deuxième carré autour de l'image (intérieur, fond jaune) -->
+                    <div class="inner-image-container">
+                        <img src="{{ asset('images/icone' ~ (categorie == 'Actualités' ? 'Pyramides' : (categorie == 'Personnages' ? 'Femme' : 'Pharaon')) ~ '.png') }}" alt="Icône {{ categorie }}">
                     </div>
+                </div>
+
+                <!-- Description sous l'image pour chaque catégorie -->
+                <div class="text-container">
+                    {% if categorie == 'Actualités' %}
+                        <p class="categorie-title">Actualités</p>
+                        <p class="categorie-description">
+                            Découvrez les dernières découvertes et actualités dans le monde de l’Egyptologie.
+                        </p>
+                    {% elseif categorie == 'Personnages' %}
+                        <p class="categorie-title">Personnages</p>
+                        <p class="categorie-description">
+                            Quand est devenu roi le pharaon Toutankhamon? Ou est née la reine Nerfertari? Découvrez-le ici!
+                        </p>
+                    {% elseif categorie == 'Vie quotidienne' %}
+                        <p class="categorie-title">Vie quotidienne</p>
+                        <p class="categorie-description">
+                            Apprenez-en plus sur la vie quotidienne des personnes en Egypte ancienne!
+                        </p>
+                    {% endif %}
+
+                    <!-- Ligne noire -->
+                    <div class="line"></div>
+                </div>
+            </div>
+            {# Bouton pour ajouter un nouvel article #}
+    {% if app.user and (is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')) %}
+    <div class="button-group">
+        <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
+    </div>
+{% endif %}
+            <!-- Liste des articles pour la catégorie -->
+            
+            <div class="articles-list">
+                {% set hasArticles = false %}
+                {% for article in articles %}
+                    {% if article.categorie.nom == categorie %}
+                        {% set hasArticles = true %}
+                        <div class="article">
+                            <p class="titreArticle">{{ article.Titre }}</p>
+                            <p class="author">Nom de l'auteur : {{ article.Utilisateur.Prenom }} {{ article.Utilisateur.Nom }}</p>
+                            <p class="date">{{ article.Date ? article.Date|date('d/m/Y H:i:s') : '' }}</p>
+                            <div class="date-line"></div> <!-- Ligne sous la date -->
+                            <p class="event-resume">Résumé: {{ article.Resume }}</p>
+                            <p class="event-contenu">{{ article.Contenu }}</p>
+                            <p class="categorie">Catégorie : {{ article.categorie.nom }}</p>
+                            <div class="button-group">
+                                {# Condition si l'utilisateur a un rôle admin ou modérateur et que l'article n'a pas été encore validé, 
+                                on laisse le bouton modifier. Sinon il n'apparait plus #}
+                                {% if app.user %}
+                                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MODERATOR') or not article.Validation %}
+                                        <a class="bouton fondBouton" href="{{ path('app_article_edit', {'id': article.id}) }}">Modifier</a>
+                                    {% endif %}
+                                {% endif %}
+
+                                {# Condition si l'utilisateur a un rôle admin et que l'article n'a pas encore été validé, le bouton reste présent. Sinon il disparait #}
+                                {% if is_granted('ROLE_ADMIN') and not article.Validation %}
+                                    <a class="bouton fondBouton" href="{{ path('app_article_valid_event', {'id': article.id}) }}" 
+                                       onclick="event.preventDefault(); document.getElementById('validate-article-{{ article.id }}').submit();">Valider</a>
+                                    <form id="validate-article-{{ article.id }}" action="{{ path('app_article_valid_event', {'id': article.id}) }}" method="POST" style="display: none;">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('validate' ~ article.id) }}">
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                {% if not hasArticles %}
+                    <p class="no-articles">Pas d'article</p>
                 {% endif %}
-            {% endfor %}
-
-            {% if not hasArticles %}
-                <div class="actus">
-                    <p>Pas d'article</p>
-                </div>
-            {% endif %}
-
-            {% if app.user and (is_granted('ROLE_ADMIN') or is_granted('ROLE_USER')) %}
-                <div class="button-group">
-                    <a class="bouton fondBouton" href="{{ path('app_article_new') }}">Nouvel article</a>
-                </div>
-            {% endif %}
+            </div>
         </div>
     {% endfor %}
 </div>
+
+
 
 {% endblock %}

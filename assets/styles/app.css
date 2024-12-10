@@ -25,7 +25,7 @@ h1, h2, h3 {
 
 /* BUTTON */
 .btn-primary {
-    padding: 3px 16px;
+    padding: 1px 16px;
     background-color: #E4C520;
     color: black;
     border-radius: 10px;
@@ -33,6 +33,7 @@ h1, h2, h3 {
     cursor: pointer;
     font-family: Ubuntu;
     transition: all .2s ease;
+    text-decoration: none;
 }
 .btn-primary:hover {
     background-color: #ffe550;

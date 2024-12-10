@@ -1,12 +1,3 @@
-@media (max-width: 768px) {
-    .categorie1,
-    .categorie2,
-    .categorie3 {
-        flex-direction: column;
-        width: 100%;
-    }
-}
-
 .imageAccueil {
     background-image: linear-gradient(to left, transparent, #f5f5f5 85%),
         url('../../images/boat.jpeg');
@@ -26,7 +17,6 @@
     }
 }
 
-/* Pour les smartphones */
 @media (max-width: 600px) {
     .imageAccueil {
         height: auto;
@@ -37,6 +27,7 @@
     }
 }
 
+/* Texte d'accueil */
 .texteAccueil {
     padding-top: 0;
     flex-direction: column;
@@ -48,15 +39,33 @@
     padding: 2%;
 }
 
-.titreCategories {
-    border-bottom: 2px;
+/* Boutons */
+.buttonHome {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    background-color: #E4C520; 
+    color: black; 
+    text-align: center;
+    text-decoration: none; 
+    border-radius: 24px; 
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
 }
 
-.largeur {
-    width: 20%;
+.buttonHome:hover {
+    background-color: #C7A019; 
+    transform: scale(1.05); /* Zoom léger au survol */
 }
 
-.categorie1 {
+.buttonHome:active {
+    transform: scale(0.95); /* Réduction légère lorsqu'on clique */
+}
+
+/* Catégories */
+.categorie1, .categorie2, .categorie3 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,17 +78,16 @@
     margin-bottom: 6%;
 }
 
-.categorie1 img {
-    height: 100%;
+.categorie1 img, .categorie2 img, .categorie3 img {
     width: auto;
+    height: 100%;
     max-width: 100%;
     border-right: 2px solid #000;
-    padding-right: 85px;
+    padding-right: 0px;
     padding-left: 50px;
-    height: 100%;
 }
 
-.categorie1 button {
+.categorie1 button, .categorie2 button, .categorie3 button {
     font-size: 24px;
     text-align: center;
     padding-left: 57px;
@@ -87,84 +95,21 @@
     background-color: #fff8d4;
     border: none;
 }
-.categorie2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff8d4;
-    border: 1px solid #000;
-    border-radius: 24px;
-    width: fit-content;
-    height: 159px;
-    margin: auto;
-    margin-bottom: 6%;
-}
 
+/* Catégories spécifiques */
 .categorie2 img {
-    width: auto;
-    height: 100%;
-    max-width: 100%;
-    border-right: 2px solid #000;
-    padding-right: 102px;
-    padding-left: 50px;
-    height: 100%;
     background-color: #fff8d4;
     border-radius: 100px 0px 0px 100px;
 }
 
-.categorie2 button {
-    font-size: 24px;
-    text-align: center;
-    padding-left: 57px;
-    padding-right: 57px;
-    background-color: #fff8d4;
-    border: none;
-}
-
-.categorie3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff8d4;
-    border: 1px solid #000;
-    border-radius: 24px;
-    width: fit-content;
-    height: 159px;
-    margin: auto;
-    margin-bottom: 6%;
-}
-
-.categorie3 img {
-    width: auto;
-    height: 100%;
-    max-width: 100%;
-    border-right: 2px solid #000;
-    padding-right: 58px;
-    padding-left: 50px;
-}
-
-.categorie3 button {
-    font-size: 24px;
-    text-align: center;
-    padding-left: 57px;
-    padding-right: 57px;
-    background-color: #fff8d4;
-    border: none;
-}
-
-@media (max-width: 480px) {
-    .titreEvènements {
-        border-bottom: 2px;
-        font-size: 24px;
-        margin-left: 20px;
+@media (max-width: 768px) {
+    .categorie1, .categorie2, .categorie3 {
+        flex-direction: column;
+        width: 100%;
     }
 }
 
-.largeur1 {
-    width: 27%;
-    margin-left: 80px;
-}
-
+/* Actualités */
 .actualité1 {
     background-color: #fff;
     border: 1px solid #000;
@@ -172,7 +117,7 @@
     height: fit-content;
     font-weight: bold;
     font-size: 18px;
-    line-height: 1, 8px;
+    line-height: 1.8;
     border-radius: 9px;
     padding: 20px;
     position: relative;
@@ -183,46 +128,22 @@
     margin-bottom: 10px;
 }
 
-.event-title {
-    color: '#E4C52';
-    font-size: 32px;
-}
-
-.event-date {
-    color: rgb(113 113 122);
-    font-size: 16px;
-}
-
-.categories-container,
-.actus {
-    padding: 50px;
+/* Styles de texte et images */
+.textes-conteneurs {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.home-categories {
     flex-direction: column;
-    width: unset;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.categories-container {
-    align-items: baseline;
+.textes-conteneurs .texte-accueil:nth-child(2) p {
+    order: 1;
 }
 
-.categories-title {
-    width: 100%;
-    margin-bottom: 60px;
-}
-
-.categories {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.titreEvènements {
-    margin-left: 80px;
+.textes-conteneurs .texte-accueil:nth-child(2) img {
+    order: 2;
+    height: 240px;
+    margin-right: 200px;
 }
 
 .texte-accueil {
@@ -269,19 +190,44 @@
     font-weight: 700;
 }
 
-.textes-conteneurs {
+/* Conteneurs de catégories */
+.categories-container,
+.actus {
+    padding: 50px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
 }
 
-.textes-conteneurs .texte-accueil:nth-child(2) p {
-    order: 1;
+.home-categories {
+    flex-direction: column;
+    width: unset;
 }
 
-.textes-conteneurs .texte-accueil:nth-child(2) img {
-    order: 2;
-    height: 240px;
-    margin-right: 200px;
+.categories-container {
+    align-items: baseline;
+}
+
+.categories-title {
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.titreCategories {
+   text-decoration: none;
+}
+
+.largeur {
+    width: 18%;
+}
+
+.largeur1 {
+    width: 27%;
+    margin-left: 80px;
 }
