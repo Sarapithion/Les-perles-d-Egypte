@@ -1,3 +1,56 @@
+@media (max-width: 768px) {
+    .imageAccueil {
+        background-size: cover;
+        background-position: center;
+        height: 50vh;
+    }
+    .texteAccueil {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 20 px auto;
+    }
+    .buttonHome {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+    .categorie1,
+    .categorie2,
+    .categorie3 {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px; /* Ajuste la marge pour plus d'espace entre les éléments */
+    }
+
+    .categorie1 img,
+    .categorie2 img,
+    .categorie3 img {
+        max-width: 100%; /* Redimensionne les images pour occuper toute la largeur disponible */
+        padding-left: 0px; /* Enlève un padding inutile */
+    }
+
+    .categorie1 button,
+    .categorie2 button,
+    .categorie3 button {
+        font-size: 18px; /* Réduit la taille des boutons */
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .actualité1 {
+        font-size: 16px; /* Réduit la taille du texte */
+        padding: 15px; /* Moins de padding pour ne pas trop prendre de place */
+    }
+
+    .texte-accueil p {
+        font-size: 18px; /* Texte plus petit */
+        line-height: 28px; /* Ajuste la hauteur de ligne */
+    }
+}
+
 .imageAccueil {
     background-image: linear-gradient(to left, transparent, #f5f5f5 85%),
         url('../../images/boat.jpeg');
@@ -7,26 +60,6 @@
     height: auto;
     width: 100vw;
 }
-
-@media (max-width: 1024px) {
-    .imageAccueil {
-        background-size: contain; /* Garde toute l'image visible sans rognage */
-        height: auto; /* Laisse la hauteur s'adapter automatiquement */
-        min-height: 50vh; /* Garde au moins 50% de la hauteur de l'écran */
-        width: 100vw;
-    }
-}
-
-@media (max-width: 600px) {
-    .imageAccueil {
-        height: auto;
-        background-size: contain; /* L'image est complètement visible */
-        background-position: top center; /* L'image est centrée verticalement et horizontalement */
-        width: 100vw;
-        min-height: 50vh;
-    }
-}
-
 /* Texte d'accueil */
 .texteAccueil {
     padding-top: 0;
@@ -44,11 +77,11 @@
     display: inline-block;
     padding: 10px 20px;
     border: none;
-    background-color: #E4C520; 
-    color: black; 
+    background-color: #e4c520;
+    color: black;
     text-align: center;
-    text-decoration: none; 
-    border-radius: 24px; 
+    text-decoration: none;
+    border-radius: 24px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -56,7 +89,7 @@
 }
 
 .buttonHome:hover {
-    background-color: #C7A019; 
+    background-color: #c7a019;
     transform: scale(1.05); /* Zoom léger au survol */
 }
 
@@ -65,7 +98,9 @@
 }
 
 /* Catégories */
-.categorie1, .categorie2, .categorie3 {
+.categorie1,
+.categorie2,
+.categorie3 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,7 +113,9 @@
     margin-bottom: 6%;
 }
 
-.categorie1 img, .categorie2 img, .categorie3 img {
+.categorie1 img,
+.categorie2 img,
+.categorie3 img {
     width: auto;
     height: 100%;
     max-width: 100%;
@@ -87,7 +124,9 @@
     padding-left: 50px;
 }
 
-.categorie1 button, .categorie2 button, .categorie3 button {
+.categorie1 button,
+.categorie2 button,
+.categorie3 button {
     font-size: 24px;
     text-align: center;
     padding-left: 57px;
@@ -103,7 +142,9 @@
 }
 
 @media (max-width: 768px) {
-    .categorie1, .categorie2, .categorie3 {
+    .categorie1,
+    .categorie2,
+    .categorie3 {
         flex-direction: column;
         width: 100%;
     }
@@ -194,8 +235,6 @@
 .categories-container,
 .actus {
     padding: 50px;
-    display: flex;
-    flex-wrap: wrap;
     align-items: center;
 }
 
@@ -217,10 +256,12 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .titreCategories {
-   text-decoration: none;
+    text-decoration: none;
 }
 
 .largeur {

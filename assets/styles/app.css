@@ -1,14 +1,14 @@
-
-
 * {
     margin: 0;
 }
-body{
-    	background-color: #F5F5F5;
-        font-family: Ubuntu;
+body {
+    background-color: #f5f5f5;
+    font-family: Ubuntu;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-family: Dekko;
 }
 
@@ -26,22 +26,22 @@ h1, h2, h3 {
 /* BUTTON */
 .btn-primary {
     padding: 1px 16px;
-    background-color: #E4C520;
+    background-color: #e4c520;
     color: black;
     border-radius: 10px;
     border: none;
     cursor: pointer;
     font-family: Ubuntu;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
     text-decoration: none;
 }
 .btn-primary:hover {
     background-color: #ffe550;
 }
 
-
 /* Style pour le bouton actif */
 .button.active {
-    background-color: #ffe550; 
-    font-weight: bold; 
+    border-bottom: 2px solid #ffe550;
+    font-weight: bold;
+    padding-bottom: 10px;
 }

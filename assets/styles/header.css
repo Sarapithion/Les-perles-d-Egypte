@@ -1,3 +1,41 @@
+@media (max-width: 768px) {
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        width: 100%; /* Je m'assure que le header occupe toute la largeur */
+        box-sizing: border-box;
+        height: auto;
+        background-color: black; 
+        margin-bottom: 20px; /* Espacement entre le header et le contenu suivant */
+    }
+
+    .title {
+        font-size: 20px; 
+    }
+
+    .button {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        margin: 10px 0;
+    }
+
+    .buttonHeader {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .titleImg {
+        max-width: 80px; /* Ajuste la taille de l'image */
+    }
+}
+
+
 .header {
     position: relative;
     height: 120px;

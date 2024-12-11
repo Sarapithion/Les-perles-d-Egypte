@@ -43,7 +43,6 @@ align-items: center;
     margin-bottom: 30px;
 }
 
-/* En-tête de la catégorie (image + texte) */
 .categorie-header {
   display: flex;
   flex-direction: column;
@@ -57,7 +56,6 @@ align-items: center;
   margin-bottom: 50px;
 }
 
-/* Carré autour de l'image (intérieur avec bordure noire) */
 .categorie-header .inner-image-container {
   width: 160px;
   height: 140px;
@@ -69,14 +67,12 @@ align-items: center;
   margin-bottom: 20px;
 }
 
-/* Image des catégories */
 .categorie-header img {
     width: 100%;
     height: auto;
     background: #FFF8D4;
 }
 
-/* Conteneur pour le texte sous l'image */
 .text-container {
     display: flex;
     flex-direction: column;
@@ -85,14 +81,12 @@ align-items: center;
     text-align: center;
 }
 
-/* Texte des catégories (nom de la catégorie) */
 .categorie-title {
     font-size: 30px;
     color: black;
     margin-bottom: 5px;
 }
 
-/* Description sous le titre de la catégorie */
 .categorie-description {
     font-size: 15px; 
     color: black;
@@ -110,7 +104,7 @@ align-items: center;
     margin-top: 20px;
 }
 
-/* Style des articles */
+
 .article {
     position: relative; /* Nécessaire pour positionner les éléments internes avec position absolute de .categorie" */
     background-color: white;
@@ -131,7 +125,6 @@ align-items: center;
     margin: 5px 0;
 }
 
-/* Titre de l'article */
 .titreArticle {
     font-size: 18px;
     font-weight: bold;
@@ -139,32 +132,31 @@ align-items: center;
     margin-bottom: 10px;
 }
 
-/* Date de l'article */
 .date {
     font-size: 14px;
     color: #777;
     margin-bottom: 15px;
 }
 
-/* Résumé de l'article */
 .event-resume {
     font-size: 15px;
     font-weight: bold;
     color: black;
     line-height: 1.5;
-    margin-bottom: 25px; /* Espacement sous le résumé */
+    margin-bottom: 25px; 
 }
 
-/* Contenu de l'article */
 .event-contenu {
     font-size: 15px;
     color: #333;
     line-height: 1.8;
-    margin-top: 20px; /* Espacement supplémentaire entre le résumé et le contenu */
+    margin-top: 20px; 
 }
 
 
 .categorie {
+    display: flex;
+    flex-wrap: wrap; /* Va permettre d'aligner l'un en dessous de l'autre
     position: absolute; /* Me positionne par rapport à .article */
     bottom: 10px;       /* Distance depuis le bas du conteneur */
     right: 10px;        /* Distance depuis le bord droit du conteneur */
@@ -172,7 +164,9 @@ align-items: center;
     color: #555;
     margin: 0; /* Me supprime tout éventuel margin pour éviter des décalages */
 }
-
+.articles-list{
+    width:80%;
+}
 /* Groupe de boutons */
 .button-group {
     display: flex;
